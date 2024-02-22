@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flag quiz</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <div class="flex-container">
+            <div class="flex-container flex-col quiz-card">
+                <% if (locals.gameOver) { %>
+                    <h2>Game over!</h2>
+                    <h5>Best score: <%= score %></h5>
+                    <form action="/">
+                        <input type="submit" value="Start over">
+                    </form>
+                <% } else { %>
+                    <h2>Guess the country name</h2>
+                        <h1>
+                            <% if (locals.flag) { %>
+                                <%= flag.flag %>
+                            <% } else { %>
+                                Try again later sometime
+                            <% } %>
+                        </h1>
+                        <form class="flex-col" action="/submit" method="post">
+                            <input type="hidden" name="flagCountry" value="<%= flag.name %>">
+                            <input type="text" name="country" id="country" placeholder="Type your guess here">
+                            <input type="submit" value="Check country">
+                        </form>
+                        <% if (locals.score) { %>
+                            <h5>Your score: <%= score %></h5>
+                        <% } else { %>
+                            <h5>To view score, submit your first guess.</h5>
+                        <% } %>
+                <% } %>
+            </div>
+        </div>
+        
+    </body>
+</html>
